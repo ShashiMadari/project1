@@ -1,0 +1,14 @@
+[
+    {
+        "name": "David",
+        "age": "28",
+        "city": "Boston",
+        "created_at": "2024-06-01"
+    },
+    {
+        "name": "Emma",
+        "age": "22",
+        "city": "Seattle",
+        "created_at": "2024-05-10"
+    }
+]
