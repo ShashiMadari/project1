@@ -1,177 +1,230 @@
-# 🔐 Secure Data Conversion & Routing System
+🔐 Secure Data Conversion & Routing System
 
-A full-stack web application built using **PHP, MySQL, and JavaScript** that supports multi-format data conversion, secure routing, SHA256-based duplicate detection, and database storage.
+A full-stack web application built using PHP, MySQL, HTML, CSS, and JavaScript that enables multi-format data conversion, secure routing, SHA256-based duplicate detection, and structured database storage.
 
----
-
-## 🚀 Project Overview
+🚀 Project Overview
 
 This system allows users to:
 
-- Paste data in **JSON or CSV format**
-- Automatically detect the format
-- Convert between JSON and CSV
-- Save converted files in dedicated folders
-- Insert data into MySQL database
-- Prevent duplicate entries using SHA256 hashing
-- View stored database records in JSON or CSV format
+Paste data in JSON or CSV format
 
----
+Automatically detect input format
 
-## 🧠 Key Features
+Convert between JSON and CSV
 
-### ✅ Multi-Format Input
-- Accepts JSON (single object or array)
-- Accepts CSV (with header row)
+Save converted files into structured folders
 
-### ✅ Intelligent Format Detection
-- Automatically detects input type (JSON / CSV)
-- Converts to internal JSON structure
+Insert data into MySQL database
 
-### ✅ File Routing System
-- Saves JSON files to:
+Prevent duplicate entries using SHA256 hashing
+
+View database records in JSON format
+
+Download database records in CSV format
+
+The system ensures data integrity, format interoperability, and secure duplicate handling.
+
+🧠 Key Features
+✅ Multi-Format Input
+
+Accepts JSON (single object or array)
+
+Accepts CSV (with header row)
+
+✅ Intelligent Format Detection
+
+Automatically detects JSON or CSV
+
+Converts to a unified internal JSON structure
+
+✅ File Routing System
+
+Saves JSON files in:
+
 storage/json/
 
-- Saves CSV files to:
+
+Saves CSV files in:
+
 storage/csv/
 
+✅ Secure Duplicate Prevention
 
-### ✅ Secure Duplicate Prevention
-- Generates SHA256 hash for each record
-- Stores hash in database
-- Prevents duplicate insertions using UNIQUE constraint
+Generates SHA256 hash for each record
 
-### ✅ Database Viewing
-- View database as JSON
-- Download database as CSV
+Stores hash in database
 
-### ✅ Modern UI
-- Responsive design
-- Gradient background
-- Glassmorphism layout
-- Interactive buttons
+UNIQUE constraint prevents duplicate insertion
 
----
+✅ Database Viewing
 
-## 🏗️ Tech Stack
+View stored data as JSON
 
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend:** PHP
-- **Database:** MySQL
-- **Security:** SHA256 Hashing
-- **Server:** XAMPP (Apache + MySQL)
+Download stored data as CSV
 
----
+✅ Modern Responsive UI
 
-## 📂 Project Structure
+Gradient background
 
+Glassmorphism layout
+
+Interactive buttons
+
+Clean user interface
+
+🏗️ Technology Stack
+
+Frontend: HTML, CSS, JavaScript
+
+Backend: PHP
+
+Database: MySQL
+
+Security: SHA256 Hashing
+
+Server: Apache (XAMPP)
+
+📂 Project Structure
 data-router/
 │
-├── index.html
-├── process.php
-├── view.php
-├── config.php
+├── index.html        # Frontend UI
+├── process.php       # Data processing & routing logic
+├── view.php          # View database (JSON / CSV)
+├── config.php        # Database connection
 │
 ├── storage/
-│ ├── json/
-│ └── csv/
+│   ├── json/         # Saved JSON files
+│   └── csv/          # Saved CSV files
 │
-└── database.sql
+└── database.sql      # Database setup script
 
+🗄️ Database Structure
+users Table
+Column	Type	Description
+id	INT (PK)	Auto Increment ID
+name	VARCHAR(100)	User Name
+age	INT	User Age
+city	VARCHAR(100)	City Name
+created_at	DATE	Record Date
+data_hash	VARCHAR(64)	SHA256 Unique Hash
+🔐 Duplicate Prevention Logic
 
----
+Normalize record fields.
 
-## 🗄️ Database Structure
+Generate SHA256 hash:
 
-### users Table
-
-| Column      | Type        | Description |
-|------------|------------|-------------|
-| id         | INT (PK)   | Auto increment ID |
-| name       | VARCHAR    | User name |
-| age        | INT        | User age |
-| city       | VARCHAR    | City |
-| created_at | DATE       | Record date |
-| data_hash  | VARCHAR(64)| SHA256 unique hash |
-
----
-
-## 🔐 How Duplicate Prevention Works
-
-1. Each record is normalized.
-2. SHA256 hash is generated:
 name|age|city|created_at
 
-3. Hash is stored in `data_hash`.
-4. UNIQUE constraint prevents duplicate insertions.
 
----
+Store hash in data_hash.
 
-## 📥 Input Examples
+UNIQUE constraint ensures duplicates are rejected.
 
-### JSON Example
+If same record is submitted again → insertion is skipped.
 
-```json
+📥 Input Examples
+JSON Example (Array)
 [
-{
- "name": "Alice",
- "age": 30,
- "city": "New York",
- "created_at": "2024-09-01"
-}
+  {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York",
+    "created_at": "2024-09-01"
+  },
+  {
+    "name": "Bob",
+    "age": 25,
+    "city": "Chicago",
+    "created_at": "2024-08-15"
+  }
 ]
+
+JSON Example (Single Object)
+{
+  "name": "Charlie",
+  "age": 35,
+  "city": "San Francisco",
+  "created_at": "2024-07-10"
+}
+
 CSV Example
 name,age,city,created_at
-Alice,30,New York,2024-09-01
-▶️ How To Run
+David,28,Boston,2024-06-01
+Emma,22,Seattle,2024-05-10
+
+▶️ How To Run the Project
+
 Install XAMPP
 
 Place project inside:
 
 C:\xampp\htdocs\data-router
+
+
 Start Apache and MySQL
 
-Import database.sql in phpMyAdmin
+Open phpMyAdmin
+
+Import database.sql
 
 Open browser:
 
 http://localhost/data-router/index.html
-🧪 How To Test
-Paste JSON or CSV
 
-Check "Save to Database"
+🧪 Testing Workflow
+
+Paste JSON or CSV input
+
+Select "Save to Database"
 
 Click "Process & Route"
 
-Try inserting same data again → it will skip duplicates
+Re-submit same data → duplicate will be skipped
 
+Click "View as JSON" to see database data
+
+Click "Download as CSV" to export data
+
+📊 Sample Stored Records
+ID	Name	Age	City	Date
+1	Alice	30	New York	2024-09-01
+2	Bob	25	Chicago	2024-08-15
+3	Charlie	35	San Francisco	2024-07-10
+4	David	28	Boston	2024-06-01
+5	Emma	22	Seattle	2024-05-10
 🎯 What This Project Demonstrates
-Data interoperability between applications
 
-Backend validation logic
+Data interoperability
 
-Secure duplicate detection
+Backend validation & routing
 
-REST-style data routing
+Secure duplicate prevention
 
-File system storage management
+File storage management
+
+REST-style processing logic
 
 Full-stack integration
 
+Database integrity handling
+
 🔮 Future Enhancements
-Drag & drop CSV upload
 
-Login system
+File upload instead of textarea
 
-API key authentication
+User authentication system
 
-REST API endpoints
+REST API version
 
-Data analytics dashboard
+Logging & analytics dashboard
 
-Deployment to cloud server
+Role-based access control
+
+Deployment to cloud (AWS / Render / DigitalOcean)
 
 👨‍💻 Developed By
-Shashi Madari
-Computer Science Engineering
 
+Shashi Madari
+Computer Science Engineering Student
+
+📜 License
